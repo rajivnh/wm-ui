@@ -1,0 +1,12 @@
+server:
+  port: 85
+
+spring:
+  application:
+    name: wm-ui
+    
+eureka:
+  client:
+    region: default
+    service-url:
+      defaultZone: http://127.0.0.1:83/eureka  

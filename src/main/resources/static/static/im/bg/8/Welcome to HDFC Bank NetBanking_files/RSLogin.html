@@ -1,0 +1,433 @@
+
+<!-- saved from url=(0048)https://netbanking.hdfcbank.com/netbanking/entry -->
+<html><script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" type="text/css" href="./login_new.css">
+
+<style>
+img.captacha_top_align {vertical-align:text-top;}
+img.captacha_bottom_align {vertical-align:text-bottom;}
+</style>
+<meta content="no-cache" http-equiv="PRAGMA">
+<meta content="private" http-equiv="CACHE-CONTROL">
+<meta content="no-store" http-equiv="CACHE-CONTROL">
+<meta content="must-revalidate" http-equiv="CACHE-CONTROL">
+<meta content="post-check=0,pre-check=0" http-equiv="CACHE-CONTROL">
+<meta content="-1" http-equiv="Expires">
+<title>Welcome to HDFC Bank NetBanking</title>
+<link type="text/css" href="./vkb.css" rel="stylesheet">
+<script type="text/javascript">
+	window.onunload = function(){}; //For Firefox
+	
+	function logoutOnBack(){
+		var prevURL = sessionStorage.getItem('url');
+		// alert(prevURL);
+		if(prevURL != null){
+			document.frmMain.fldTxnId.value = "LGF";
+			document.frmMain.fldScrnSeqNbr.value = "01";
+			document.frmMain.fldSessionId.value = sessionStorage.getItem('session');
+			sessionStorage.removeItem('url');
+			sessionStorage.removeItem('session');
+			document.frmMain.submit();
+		}
+	}
+</script><script type="text/javascript">
+ 
+  var head = document.getElementsByTagName("head")[0];
+  var fileref = document.createElement("link");
+  fileref.setAttribute("rel", "stylesheet");
+  fileref.setAttribute("type", "text/css");
+
+	fileref.setAttribute("href", "/css/login_new.css");
+ // fileref.onload = callbackFunc();
+  head.insertBefore(fileref, head.firstChild);
+</script><script src="./RS_01_eng.js.download" language="JavaScript"></script><script type="text/JavaScript" src="./virtualkeyboard.js.download" language="JavaScript"></script><script src="./hashtable.js.download" language="JavaScript"></script><script src="./rsa.js.download" language="JavaScript"></script><script src="./des.js.download" language="JavaScript"></script><script src="./HmacSHA256.js.download" language="JavaScript"></script><script language="JavaScript">
+var l_clicked		 = false;
+
+var	isRefreshClicked = false;
+
+var l_topleft_width	 = 227;
+//var deviceTokenFSO	 = '';
+var userPhrase		 = "";
+
+var tptValue		 = "false";
+var enrollmentreqd	 = "";
+var collectionreqd	 = "";
+var rsaUserStatus	 = "";
+
+del_cookie('hdfcnetbank');
+
+function del_cookie(c_name) {
+    document.cookie = c_name + '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+}
+
+
+
+if(enrollmentreqd == 'N'){
+	l_topleft_width = 230;
+}
+if(userPhrase != '' && userPhrase.length > 30){
+	var1 = userPhrase.substring(0, 30);
+	var2 = userPhrase.substring(30);
+	userPhrase = var1 + '<br/>' + var2;
+}
+//alert ("enrollmentreqd--"+enrollmentreqd+", rsaUserStatus--"+rsaUserStatus+", collectionreqd--"+collectionreqd+", userPhrase--"+userPhrase+', l_topleft_width--'+l_topleft_width);
+//-----------------------------------------------------------------------------
+function fSubmit(e){
+
+	 var key;      
+     if(window.event) {
+		key = window.event.keyCode; //IE
+	 } else {
+		key = e.which;			//firefox      
+	 }
+
+	if(key == 37){
+		return false;
+	}
+
+	if(key != 13){
+		return true;
+	} else {
+		return fLogon();
+	}
+}
+//------------------------------------------------------------------------------
+function fLogon()
+{
+	if(enrollmentreqd == 'N' && userPhrase != '' && !document.frmMain.chkrsastu.checked) {
+		alert('Please confirm your Secure Access details');
+		return false;
+	}
+
+	var l_str_val = isStringValid(document.frmMain.fldPassword.value,"required, minlen=4", true, "IPIN (password)");
+	if(l_str_val != null){
+		return false;
+	}
+
+	//Dinesh Start - CAPTCHA
+	
+	
+	var fldDateTime= '180820133714'; //Arpita ISG_Vulnerability_Issue_Password_timespan
+
+	//Dinesh End - CAPTCHA
+/*ILENH-PasswordPolicy-22/11/2012-SandeepSaxena-Start*/
+	var randomnumber=	Math.floor(10000000 + (Math.random() * (100000000 - 10000000 + 1)));
+	var l_str_pas	=	stringToHex(des (document.frmMain.fldPassword.value.substring(0,8), document.frmMain.fldPassword.value, 1, 0));
+	var l_sub_pass	=	l_str_pas.toUpperCase().substring(2,l_str_pas.length);
+
+	while(l_sub_pass.length < 32){
+		l_sub_pass	=	l_sub_pass + "0";
+	}
+//	alert("sub1--"+l_sub_pass);
+	document.frmMain.fldRandomNumber.value	=	randomnumber+fldDateTime; // fldDateTime added by arpita ISG_Vulnerability_Issue_Password_timespan
+//	alert("random no ---"+document.frmMain.fldRandomNumber.value);
+	document.frmMain.fldPassword.value	=	hex_hmac (document.frmMain.fldRandomNumber.value,l_sub_pass);
+//	alert("----"+document.frmMain.fldPassword.value);
+/*ILENH-PasswordPolicy-22/11/2012-SandeepSaxena-END*/
+	document.frmMain.fldScrnSeqNbr.value = "01";
+	if(tptValue == '' || tptValue == 'false'){
+
+		document.frmMain.fldScrnSeqNbr.value = "04";
+
+	}
+	document.frmMain.fldTxnId.value = "LGN";
+	document.frmMain.fldLoginUserId.value = '6001004';
+
+	setValues();
+
+	if(!l_clicked){
+		document.frmMain.submit ();
+		l_clicked = true;
+	}
+	return false;
+}
+//-------------------------------------------------------------------------------
+function init(){
+	setKeyboardFocus("frmMain","fldPassword");
+	document.frmMain.fldPassword.focus();
+}
+//------------------------------------------------------------------------------
+function DeletePwd(){
+	if (document.frmMain.chksecmod.checked)
+	{
+		var strNumField = new String(document.frmMain.fldPassword.value);
+		document.frmMain.fldPassword.value = strNumField.substring(0, strNumField.length - 1);
+		document.frmMain.fldPassword.id = "";
+		doRandomize();
+	}
+	return false;
+}
+
+//-----------------------------------------------------------------------------
+function ClearPwd(){
+	if (document.frmMain.chksecmod.checked)
+		{
+		document.frmMain.fldPassword.value = "";
+		doRandomize();
+		}
+	return false;
+}
+//-----------------------------------------------------------------------------
+function SecurityWarning() {
+	if (document.frmMain.chksecmod.checked) {			
+		document.frmMain.fldPassword.readOnly =true;
+		document.frmMain.fldPassword.blur();
+	} else {			
+		document.frmMain.fldPassword.readOnly = false;
+		if (false == confirm("Use of Security Keyboard is recommended to protect your Password. Are you sure you choose NOT to use the Security Keyboard?")) {					
+			document.frmMain.chksecmod.checked = true;
+			SecurityWarning ();
+		}
+	}
+}
+//-----------------------------------------------------------------------------
+function setValues(){
+	var l_fso_value = '',
+		l_dp_value	= '';
+
+	try{
+		l_dp_value = encode_deviceprint();
+	} catch (e) {
+		l_dp_value = '';
+	}
+	document.frmMain.fldDevicePrint.value	 = l_dp_value;
+	
+	/*
+	try{
+		if(deviceTokenFSO == ''){
+			l_fso_value = parent.frames["frame_rsafp"].document.form1.device_id.value;
+		} else if (deviceTokenFSO != 'error'){			
+			l_fso_value = deviceTokenFSO;
+		}
+	} catch (e) {
+		l_fso_value = '';
+	}
+	document.frmMain.fldDeviceTokenFSO.value = l_fso_value;
+	*/
+
+}
+//-----------------------------------------------------------------------------
+/*function callFSO() {
+	try {
+		if(deviceTokenFSO == ''){
+			parent.p_remoteaddress = '103.98.63.231';
+			parent.frames["frame_rsafp"].location = 'rsa_flash_cookie.html';
+		}
+	} catch (e) {
+		deviceTokenFSO = 'error';
+	}
+}*/
+//----------------------------------------------------------------------------
+//Dinesh Start - Captcha
+    function injectHTML() {  
+	var img_src;
+			
+    }
+//----------------------------------------------------------------------------
+	function sendrequest() {
+
+
+
+		if (!isRefreshClicked){
+		document.getElementById("captcha_iframe").src = "entry?fldAppId=RS&fldTxnId=CRF&fldScrnSeqNbr=01&fldLangId=eng&fldDeviceId=01&fldLoginUserId=6001004&fldSessionId=1374753740LVMRHOFP";
+		document.getElementById("captcha_iframe").height="78";
+		document.getElementById("captcha_iframe").width="208";
+		document.frmMain.fldCaptcha.value=""; //Gaurav Wadhwani	Jun 2014	Revamping Login Pages
+			isRefreshClicked = true;
+		}
+
+	}
+//Dinesh End - Captcha
+//----------------------------------------------------------------------------
+</script>
+</head>
+<body onload="logoutOnBack(); injectHTML(); init(); return false" marginwidth="0" marginheight="0"><div style="display: none;"></div>
+<form autocomplete="off" target="_top" method="post" action="https://netbanking.hdfcbank.com/netbanking/entry" name="frmMain">
+<input autocomplete="off" name="fldpwdtmp" style="position:absolute; top:-100px; display:none;" type="password"><input value="*" name="fldTemp" type="hidden"><input value="RS" name="fldAppId" type="hidden"><input value="" name="fldTxnId" type="hidden"><input value="" name="fldScrnSeqNbr" type="hidden"><input value="eng" name="fldLangId" type="hidden"><input value="01" name="fldDeviceId" type="hidden"><input value="YG" name="fldWebServerId" type="hidden"><input value="ZZ" name="fldAppServerId" type="hidden"><input value="" name="fldLoginUserId" type="hidden"><input value="" name="fldSessionId" type="hidden"><input value="" name="fldDevicePrint" type="hidden"><input value="false" name="fldTptCustomer" type="hidden"><input value="" name="fldRsaEnrollRequired" type="hidden"><input value="" name="fldRsaUserStatus" type="hidden"><input value="" name="fldRsaImageId" type="hidden"><input value="" name="fldRsaImageHeight" type="hidden"><input value="" name="fldRsaImageWidth" type="hidden"><input value="" name="fldRsaImagePath" type="hidden"><input value="" name="fldRsaImageText" type="hidden"><input value="" name="fldRsaUserPhrase" type="hidden"><input value="" name="fldRandomNumber" type="hidden"><input value="" name="fldSbFlag" type="hidden"><input value="" name="fldTwSyncFlag" type="hidden">
+<table cellpadding="0" cellspacing="0" border="0" width="1000">
+<tbody>
+<tr>
+<td bgcolor="blue" valign="bottom" height="121"><img align="top" border="0" alt="HDFC BANK - Net Banking" src="./logo_left_top_new1.jpg"><img align="top" border="0" alt="HDFC BANK - Net Banking" usemap="#Map" src="./header1_new1.jpg"></td>
+</tr>
+</tbody>
+</table>
+<table cellpadding="0" cellspacing="0" border="0" width="1000">
+<tbody>
+<tr>
+<td valign="top" width="14">&nbsp;</td><td valign="top" width="303">
+<table class="leftBox" bgcolor="#EDF0F4" cellpadding="0" cellspacing="0" border="0" width="303">
+<tbody>
+<tr>
+<td valign="top" width="295">
+<table class="label" cellpadding="0" cellspacing="0" border="0" width="295">
+<tbody>
+<tr>
+<td valign="top" width="8">&nbsp;</td><td valign="top" colspan="2" class="nbl_ttl">NetBanking Login</td>
+</tr>
+<tr>
+<td height="6" colspan="3"></td>
+</tr>
+<tr valign="middle" align="left">
+<td width="8">&nbsp;</td><td colspan="2">
+<table width="100%" class="lForm" bgcolor="#ffffff" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td height="15" colspan="3"></td>
+</tr>
+<tr>
+<td style="margin-left:10px;width:200px;" align="center">User ID / Customer ID</td><td valign="middle" align="center" width="137"><span class="pwd_field"><input autocomplete="off" value="6001004" class="input_password" readonly="true" name="fldCustId" type="text"></span></td>
+</tr>
+<tr>
+<td height="8" colspan="3"></td>
+</tr>
+<tr>
+<td align="left">
+<p style="margin-left:10px;">IPIN (Password)</p>
+</td><td valign="middle" align="center" width="137"><span class="pwd_field"><input autocomplete="off" onkeypress="return fSubmit(event);" class="input_password" onfocus="javascript:setKeyboardFocus(&quot;frmMain&quot;,&quot;fldPassword&quot;);" name="fldPassword" type="password"></span></td><td>&nbsp;</td>
+</tr>
+<tr>
+<td class="login_tab" align="right" valign="middle" colspan="3">
+<p class="fPinPwd">
+<a target="blank" href="https://netbanking.hdfcbank.com/netbanking/IpinResetUsingOTP.htm">Forgot IPIN (Password)?</a>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<table class="label" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr align="left" valign="middle">
+<td width="4"></td><td align="left" valign="top" width="20"><input name="chksecmod" onclick="return SecurityWarning();" id="chksecmod" type="checkbox"></td><td class="vertPTxt">
+<p>Click here to use Virtual keyboard<br>
+													for the Password only (Recommended)</p>
+<p>Note: IPIN (password) is case sensitive</p>
+</td>
+</tr>
+<tr>
+<td height="3" colspan="3" class="borBtm1" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td height="5" colspan="3" valign="top"></td>
+</tr>
+<tr>
+<td height="8" colspan="3" valign="top"></td>
+</tr>
+<tr align="left" valign="middle">
+<td width="4"></td><td align="left" valign="top" width="20"></td><td class="vertPTxt">
+<p>I / We acknowledge and accept the <br>
+<a onclick="window.open(&#39;http://www.hdfcbank.com/common/hdfcbank_tnc.htm&#39;)" href="javascript:void(0)">Terms and Conditions</a> applicable and
+													  available on the site</p>
+</td>
+</tr>
+<tr>
+<td height="8" colspan="3"></td>
+</tr>
+<tr>
+<td class="login_tab1" align="right" valign="bottom" colspan="3"><a ondblclick="return fLogon()" onclick="return fLogon();" href="javascript:void(0)"><img border="0" alt="Login" src="./login_new1.gif"></a></td>
+</tr>
+<tr>
+<td height="17" colspan="3"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody>
+</table>
+</td><td width="8">&nbsp;</td>
+</tr>
+<tr>
+<td width="380" valign="top">
+<table cellpadding="0" cellspacing="0" border="0" width="135">
+<tbody>
+<tr>
+<td valign="bottom" height="70"><span><a target="_blank" href="https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&amp;dn=NETBANKING.HDFCBANK.COM&amp;lang=en"><img border="0" src="./vseal_new1.gif"></a></span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td><td valign="top">
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<table border="0" cellspacing="0" cellpadding="0" class="body_text2">
+<tbody>
+<tr>
+<td colspan="5"><font size="5">Why use IMPS ?</font></td>
+</tr>
+<tr valign="middle">
+<td height="46" width="31" class="borBtm1"><img align="left" alt="" src="./1.png"></td><td class="borBtm1" width="12">&nbsp;</td><td class="borBtm">24 x 7, 365 days (including sundays and bank holidays)</td>
+</tr>
+<tr valign="middle">
+<td class="borBtm1" height="46"><img align="left" alt="" src="./2.png"></td><td class="borBtm1">&nbsp;</td><td class="borBtm">Instant funds transfer</td>
+</tr>
+<tr valign="middle">
+<td height="46"><img align="left" alt="" src="./3.png"></td><td></td><td>Conveniently transfer funds through NetBanking or MobileBanking</td>
+</tr>
+</tbody>
+</table>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="borBtm1" height="15">&nbsp;</td>
+</tr>
+</tbody></table>
+<table border="0" cellspacing="0" cellpadding="0" class="body_text2 next top15">
+<tbody>
+<tr>
+<td>
+<table border="0" bordercolor="#CCFF33" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td height="2" width="8%">&nbsp;</td><td>
+<table class="formtable vkb" border="0" bordercolor="#990000" cellpadding="0" cellspacing="0" width="70%">
+<tbody>
+<tr>
+<td align="center" height="25"><b>Virtual Keyboard</b></td>
+</tr>
+<tr>
+<td><script language="JavaScript">
+										drawVirtualKeyboard ();
+										</script>			<table cellspacing="0" cellpadding="0" border="0">			<tbody>				<tr>					<td colspan="2">						<div id="login-keyboard-special">							<table>								<tbody>									<tr><td><button id="elemS0" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">?</button></td><td><button id="elemS1" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">{</button></td><td><button id="elemS2" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">_</button></td><td><button id="elemS3" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">|</button></td><td><button id="elemS4" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">@</button></td><td><button id="elemS5" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">^</button></td><td><button id="elemS6" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">/</button></td><td><button id="elemS7" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">!</button></td><td><button id="elemS8" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">`</button></td><td><button id="elemS9" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">(</button></td><td><button id="elemS10" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">[</button></td><td><button id="elemS11" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">&gt;</button></td><td><button id="elemS12" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">-</button></td>									</tr>								</tbody>							</table>							<table>								<tbody>									<tr>										<td class="halfwidthLgn">											&nbsp;										</td><td><button id="elemS13" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">&lt;</button></td><td><button id="elemS14" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">#</button></td><td><button id="elemS15" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">$</button></td><td><button id="elemS16" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">=</button></td><td><button id="elemS17" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">*</button></td><td><button id="elemS18" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">&amp;</button></td><td><button id="elemS19" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">,</button></td><td><button id="elemS20" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">:</button></td><td><button id="elemS21" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">)</button></td><td><button id="elemS22" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">}</button></td><td><button id="elemS23" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">~</button></td><td><button id="elemS24" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">]</button></td><td><button id="elemS25" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">.</button></td>										<td class="halfwidthLgn">											&nbsp;										</td>										<td class="clearLgn">											&nbsp;										</td>									</tr>								</tbody>							</table>						</div>					</td>				</tr>				<tr>					<td>						<div id="login-keyboard-alpha" align="center">							<table>								<tbody>									<tr><td><button id="elemA0" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">q</button></td><td><button id="elemA1" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">n</button></td><td><button id="elemA2" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">c</button></td><td><button id="elemA3" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">k</button></td><td><button id="elemA4" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">o</button></td><td><button id="elemA5" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">d</button></td><td><button id="elemA6" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">j</button></td><td><button id="elemA7" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">a</button></td><td><button id="elemA8" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">v</button></td><td><button id="elemA9" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">h</button></td>									<td class="button">									<button class="backbutton" id="elemC1" onclick="return DeletePwd();">Back</button>									</td>									</tr>								</tbody>							</table>							<table>								<tbody>									<tr>										<td class="halfwidthLgn">											&nbsp;										</td><td><button id="elemA10" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">l</button></td><td><button id="elemA11" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">r</button></td><td><button id="elemA12" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">i</button></td><td><button id="elemA13" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">b</button></td><td><button id="elemA14" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">x</button></td><td><button id="elemA15" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">t</button></td><td><button id="elemA16" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">m</button></td><td><button id="elemA17" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">y</button></td><td><button id="elemA18" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">g</button></td>									<td class="button">									<button class="clearbutton" id="elemC2" onclick="return ClearPwd();">Clear</button>									</td>									</tr>								</tbody>							</table>							<table>								<tbody>									<tr>										<td class="halfwidthLgn">											&nbsp;										</td>										<td class="clearLgn">											&nbsp;										</td><td><button id="elemA19" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">s</button></td><td><button id="elemA20" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">f</button></td><td><button id="elemA21" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">u</button></td><td><button id="elemA22" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">p</button></td><td><button id="elemA23" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">e</button></td><td><button id="elemA24" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">z</button></td><td><button id="elemA25" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">w</button></td>									<td class="button">									<button class="capslockbutton" id="elemC0" onclick="return setCase();">Caps Lock</button>									</td>									</tr>								</tbody>							</table>							<table border="0">								<tbody>									<tr>										<td class="clearLgn">											&nbsp;										</td>										<td class="clearLgn">											&nbsp;										</td>									<td class="button">									<button class="hoveringbutton" id="virtualButton" onclick="return SetVirtual();">Hovering</button>									<input id="elemC4" type="checkbox" name="elemC4" style="display:none">									</td><td class="button">									<button class="mixedbutton" onmouseup="return changeBack(),showValue(this);" onmousedown="return changeToStar();" id="elemSpace" onclick="return showDummy();" onmouseover="startHover(this);" onmouseout="return changeBack(),stopHover();">Space</button>									</td>									<td class="clearLgn">										&nbsp;									</td>									<td class="button">									<button class="mixedbutton" id="elemC3" onclick="return setRandom();">Shuffle Off</button>									</td>								</tr>								</tbody>							</table>						</div>					</td>					<td align="left" valign="top">						<div id="login-keyboard-numeric">							<table>								<tbody>									<tr><td><button id="elemN0" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">3</button></td><td><button id="elemN1" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">4</button></td><td><button id="elemN2" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">5</button></td>									</tr>								</tbody>							</table>							<table>								<tbody>									<tr><td><button id="elemN3" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">8</button></td><td><button id="elemN4" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">1</button></td><td><button id="elemN5" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">9</button></td>									</tr>								</tbody>							</table>							<table>								<tbody>									<tr><td><button id="elemN6" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">7</button></td><td><button id="elemN7" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">2</button></td><td><button id="elemN8" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">0</button></td>									</tr>								</tbody>							</table>							<table>								<tbody>									<tr>										<td class="clearLgn">											&nbsp;										</td><td><button id="elemN9" onmouseover="startHover(this);" onmousedown="return changeToStar();" onmouseup="return changeBack(),showValue(this);" onmouseout="return changeBack(),stopHover();" onclick="return showDummy();">6</button></td>										<td class="clearLgn">											&nbsp;										</td>									</tr>								</tbody>							</table>						</div>					</td>				</tr>			</tbody>		</table></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellspacing="0" cellpadding="0" class="vkb_btm_Table" bgcolor="#edf0f4">
+<tbody><tr>
+<td> Beware of fraudulent emails. HDFC Bank will never send you emails asking for
+                        NetBanking IPIN (Password), Debit Card  or any account details. If you receive
+                        such an email please, delete it immediately </td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+
+
+<meta content="no-cache" http-equiv="Pragma">
+<meta content="-1" http-equiv="Expires">
+
+
+</body></html>

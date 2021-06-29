@@ -1,0 +1,221 @@
+button
+{
+	border:0px solid;
+	background:transparent;
+	font-family:verdana;
+	font-weight:bold;
+	font-size:12px;
+}
+#login-keyboard {
+	width: 90%;/* position:relative;PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px;   PADDING-TOP: 12px;*/
+}
+.loginkeyboard
+{
+	 PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; border:0px solid #A1C5E7;
+}
+/*
+.TopLeftCurve
+{
+	background-image:url('/netbanking/gif/LTCurve.jpg'); background-repeat:no-repeat; height:7px;  width:7px; text-align:left; 
+}
+.TopRightCurve
+{
+	background-image:url('/netbanking/gif/RTCurve.jpg'); background-repeat:no-repeat; height:7px; width:7px; text-align:right; overflow:hidden
+}
+.BottomLeftCurve
+{
+	background-image:url('/netbanking/gif/LBCurve.jpg'); background-repeat:no-repeat; height:7px;  width:7px; text-align:left;  overflow:hidden
+}
+.BottomRightCurve
+{
+	background-image:url('/netbanking/gif/RBCurve.jpg'); background-repeat:no-repeat; height:7px; width:7px; text-align:right; overflow:hidden
+}
+.LeftLine
+{
+	border-left: 1px solid #A1C5E7; 
+}
+.LeftLine
+{
+	border-right: 1px solid #A1C5E7; 
+}
+.TopMiddleLine
+{
+	border-top: 1px solid #A1C5E7; 
+}
+.BottomMiddleLine
+{
+	border-bottom: 1px solid #A1C5E7; 
+}*/
+#login-keyboard TABLE TR TD {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 1px; VERTICAL-ALIGN: middle; WIDTH: 28px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard TABLE TR TD BUTTON {
+	background-image:url('/netbanking/gif/r_button.gif'); background-repeat:no-repeat; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 28px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard TABLE TR TD.halfwidth {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; VERTICAL-ALIGN: middle; WIDTH: 10px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard TABLE TR TD.clear {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; VERTICAL-ALIGN: middle; WIDTH: 28px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard-special {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px;
+}
+#login-keyboard-special TABLE {
+	border-spacing: 0px
+}
+#login-keyboard-special TABLE TR TD {
+	WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; BORDER:0px solid; margin:0px;
+}
+#login-keyboard-special TABLE TR TD BUTTON {
+	background-image:url('/netbanking/gif/r_button.gif'); background-repeat:no-repeat; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 28px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard-special TABLE TR TD.halfwidth {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard-special TABLE TR TD.clear {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-special TABLE TR TD.halfwidthLgn {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard-special TABLE TR TD.clearLgn {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-alpha {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+#login-keyboard-alpha TABLE {
+	border-spacing: 0px
+}
+#login-keyboard-alpha TABLE TR TD {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-alpha TABLE TR TD BUTTON {
+	background-image:url('/netbanking/gif/r_button.gif'); background-repeat:no-repeat; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 28px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard-alpha TABLE TR TD.halfwidth {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-alpha TABLE TR TD.halfwidthLgn {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-alpha TABLE TR TD.clear {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-alpha TABLE TR TD.clearLgn {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-alpha TABLE TR TD button.clearbutton {
+	background-image:url('/netbanking/gif/clear_button.gif'); background-repeat:no-repeat; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 59px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard-alpha TABLE TR TD button.backbutton {
+	background-image:url('/netbanking/gif/back_button.gif'); background-repeat:no-repeat; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 36px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard-alpha TABLE TR TD button.capslockbutton {
+	background-image:url('/netbanking/gif/capslock.gif'); background-repeat:no-repeat; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 110px; PADDING-TOP: 0px; HEIGHT: 28px;  TEXT-ALIGN: center
+}
+#login-keyboard-alpha TABLE TR TD button.mixedbutton {
+	background-image:url('/netbanking/gif/capslock.gif'); background-repeat:no-repeat; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 110px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard-alpha TABLE TR TD button.hoveringbutton {
+	background-image:url('/netbanking/gif/capslock.gif'); background-repeat:no-repeat; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 110px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard-numeric {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: right; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+#login-keyboard-numeric TABLE {
+	border-spacing: 0px
+}
+#login-keyboard-numeric TABLE TR TD {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-numeric TABLE TR TD BUTTON {
+	background-image:url('/netbanking/gif/r_button.gif'); background-repeat:no-repeat; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px;  WIDTH: 28px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+#login-keyboard-numeric TABLE TR TD.halfwidth {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-numeric TABLE TR TD.halfwidthLgn {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-numeric TABLE TR TD.clear {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-numeric TABLE TR TD.clearLgn {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center;
+}
+#login-keyboard-controls {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+#login-keyboard-controls TABLE {
+	 border-spacing: 0px
+}
+#login-keyboard-controls TABLE TR TD {
+	PADDING: 0px; /* BORDER-RIGHT: 1px outset; BORDER-TOP: 1px outset; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; VERTICAL-ALIGN: middle; BORDER-LEFT: 1px outset; WIDTH: 28px; PADDING-TOP: 0px; BORDER-BOTTOM: 1px outset; HEIGHT: 28px; BACKGROUND-COLOR: #EAF2FA; TEXT-ALIGN: center*/
+}
+#login-keyboard-controls TABLE TR TD.button {
+	/*PADDING: 2px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; VERTICAL-ALIGN: middle; WIDTH: 70px; PADDING-TOP: 0px; HEIGHT: 28px BACKGROUND-COLOR: #F1F5F5; TEXT-ALIGN: center; BORDER: 2px outset*/
+}
+#login-keyboard-controls TABLE TR TD BUTTON {
+	background-image:url('/netbanking/gif/r_button.gif'); background-repeat:no-repeat; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; WIDTH: 70px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center; VERTICAL-ALIGN: top; 
+}
+#login-keyboard-controls TABLE TR TD.halfwidth {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px; TEXT-ALIGN: center; BORDER-BOTTOM-STYLE: none
+}
+#login-keyboard-controls TABLE TR TD.clear {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; HEIGHT: 28px TEXT-ALIGN: center; 
+}
+#login-keyboard-controls TABLE TR TD.halfwidthLgn {
+	VERTICAL-ALIGN: middle; WIDTH: 10px; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; HEIGHT: 28px; TEXT-ALIGN: center; 
+}
+#login-keyboard-controls TABLE TR TD.clearLgn {
+	VERTICAL-ALIGN: middle; WIDTH: 28px; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; HEIGHT: 28px TEXT-ALIGN: center; 
+}
+.blue-block {
+	PADDING-BOTTOM: 16px; MARGIN: 0px 0px 3px; BACKGROUND-COLOR: #ebeff6
+}
+.blue-block H3 {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 0px; COLOR: #039; PADDING-TOP: 2px;
+}
+.blue-block H4 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 12px 0px 0px 5px; PADDING-TOP: 0px
+}
+.blue-block UL {
+	MARGIN: 12px 0px 0px
+}
+.blue-block P {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 12px 5px 0px; PADDING-TOP: 0px
+}
+.blue-block P.with-title {
+	MARGIN: 0px 5px
+}
+BR.clear-both {
+	CLEAR: both; DISPLAY: block; FONT-WEIGHT:bold; FONT: 1px monospace
+}
+DIV.clear-both {
+	CLEAR: both; DISPLAY: block; FONT-WEIGHT:bold; FONT: 1px monospace
+}
+#main-content {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 576px; PADDING-TOP: 0px; POSITION: relative
+}
+.DataLeftAlignedClear
+{
+    FONT-WEIGHT: normal; FONT-SIZE: 8pt; VERTICAL-ALIGN: middle; TEXT-ALIGN: left;
+}
+.DataLeftAligned
+{
+    FONT-WEIGHT: normal; FONT-SIZE: 8pt; VERTICAL-ALIGN: middle; TEXT-ALIGN: left
+}
+.formtable {  
+	font-size: 0.70em;
+	color: #333333;
+	border-color: #C2DAF0; 
+	border-width: 1px;  
+	border-style: solid; 
+	background-color: #EAF2FA; 
+	margin-top: 2px; 
+	margin-right: 0px; 
+	margin-bottom: 10px; 
+	margin-left: 2px;
+}

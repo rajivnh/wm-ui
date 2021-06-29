@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Wealth Transfer</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.0/css/all.css">
+
+		<link rel="stylesheet" href="static/cs/jqbar.css">
+		<link rel="stylesheet" href="static/cs/bootstrap.css">
+		<link rel="stylesheet" href="static/cs/mdb.css">
+		<link rel="stylesheet" href="static/cs/compiled-addons-4.19.1.min.css">
+		<link rel="stylesheet" type="text/css" href="static/cs/mdb-plugins-gathered.min.css">
+		<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<style>
+		*{
+			font-family:'PT Sans Narrow', sans-serif;
+		}
+		body, html {
+			margin:0;
+			height:100%;
+		}
+		.landscape {
+			background-image:url("static/im/landscape.jpg");
+			height:100%;
+			background-position:center;
+			background-repeat:no-repeat;
+			background-size:cover;
+		}	
+		.animtext .word {
+			display: inline-block;
+		}	
+		span > a {
+		  position: relative;
+		  color: #196C7D;
+		  text-decoration: none;
+		}
+		span > a:hover {
+		  color: #196C7D;
+		}
+		span > a::before {
+		  content: "";
+		  position: absolute;
+		  width: 100%;
+		  height: 1px;
+		  bottom: 0;
+		  left: 0;
+		  background-color: #196C7D;
+		  visibility: hidden;
+		  transform: scaleX(0);
+		  transition: all 0.3s ease-in-out 0s;
+		}
+		span > a:hover::before {
+		  visibility: visible;
+		  transform: scaleX(1);
+		}		
+	</style>
+<body>
+	<div class='landscape'>
+		<div style='top:0px;background:#D8ECF0;height:70px;'>
+			<div style='float:left;padding:0 0 0 10px;height:10px;margin-top:-14px;width:200px'>
+				<a href="/" title="Home">
+					<img src="static/im/hcl.png" alt="Home" height=100>
+				</a>
+			</div>	
+			<div style='float:right;padding:12px 28px 0 0;margin-top:10px'>
+				<span style='color:#196C7D;font-size:16px;'><a href='/'>Sign Out</a></span>
+			</div>
+		</div>
+
+		<div class='gdpr' style='display:none;border:0px solid red;width:100%;text-align:center;position:fixed;bottom:2%;left:50%;transform:translate(-50%,-50%);background:#D8ECF0;color:black;padding-bottom:10px;opacity:0.96'>
+			<span style='font-size:42px;color:#196C7D;color:#D8ECF0;line-height:50px;font-weight:bold;' class="animtext"><span class="word">CONNECT.</span> <span class="word">ORGANIZE.</span> <span class="word">GET THINGS DONE.</span></span> <br>
+			<span>This websites gathers information about how users interact with it, in order to continuously improve the service provided to you.
+			Please confirm you're ok with this to continue.</span> <br>
+			<a onclick='creative()' class="btn btn-sm" style='font-size:18px;color:black;opacity:.99'>Accept & Continue</a>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="static/js/jquery.min.js"></script>
+	<script type="text/javascript" src="static/js/popper.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap.js"></script>
+	<script type="text/javascript" src="static/js/mdb.js"></script>
+	<script type="text/javascript" src="static/js/compiled-addons.min.js"></script>
+	<script type="text/javascript" src="static/js/mdb-plugins-gathered.min.js"></script>
+	<script type="text/javascript" src='static/js/jquery.playSound.js'></script>
+	<script type="text/javascript" src="https://ricostacruz.com/jquery.transit/jquery.transit.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+	<script type="text/javascript" src='static/js/hammer.min.js'></script>
+
+	<script>
+		$(document).ready(function() {
+			$('.gdpr').fadeIn(1000, animText);
+		});
+
+		function animText() {
+			$('.animtext').css('color', '#196C7D');
+			/*
+			anime.timeline({loop: false})
+				.add({
+					targets: '.animtext .word',
+					scale: [14,1],
+					opacity: [0,1],
+					easing: "easeOutCirc",
+					duration: 500,
+					delay: (el, i) => 500 * i
+			}).add({
+					targets: '.animtext',
+					opacity: 1,
+					duration: 500,
+					easing: "easeOutExpo",
+					delay: 500
+			});*/
+
+			var textWrapper = document.querySelector('.animtext');
+			textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+			anime.timeline({loop: true})
+			  .add({
+				targets: '.animtext .letter',
+				opacity: [0, 1],
+				easing: "easeInOutQuad",
+				duration: 500,
+				delay: (el, i) => 50 * (i+1)
+			  }).add({
+				targets: '.animtext',
+				opacity: 0,
+				duration: 500,
+				easing: "easeOutExpo",
+				delay: 5000
+			  });
+		}
+
+		var Spinner = {
+			show: function() {
+				$("body").append(Spinner.html());
+				$('div.spinner').fadeIn(1000);
+			},
+			hide: function() {
+				$('div.spinner').fadeOut(1000);
+			},
+			html: function() {
+				var position = 'top:'+((window.innerHeight/2)-80)+'px;left:'+((window.innerWidth/2)-40)+'px;';
+
+				return '<div class="spinner"><style>.spinner-circle{opacity:1;height:80px;width:80px;min-width:80px;min-height:80px;transform-origin:40px 40px 40px;transition:.5s;animation:spinnerAnimation 1.3s infinite cubic-bezier(.53,.21,.29,.67)}@keyframes spinnerAnimation{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.spinner{position:fixed;'+position+'width:80px;height:80px;padding:10px 20px 0px 0px;z-index:9999;display:none}</style><svg class="spinner-circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 80 80"><defs><path id="a" d="M0 0h40v40H0z"/></defs><g fill="none" fill-rule="evenodd"><circle cx="40" cy="40" r="38" stroke="#DEECF9" stroke-width="2.817"/><g transform="translate(40)"><mask id="b" fill="#fff"><use xlink:href="#a"/></mask><circle cy="40" r="38" stroke="#0078D7" stroke-width="2.817" mask="url(#b)"/></g></g></svg></div>';
+			}
+		}
+
+		function creative() {
+			Spinner.show();
+
+			setTimeout(function() {
+				javascript:document.location.href = "home.html?token=" + $.urlParam('token');
+			}, 4000);
+		}
+		
+		$.urlParam = function(name) {
+		    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+		    
+		    if(results==null) {
+		       return null;
+		    }
+		    
+		    return decodeURI(results[1]) || 0;
+		}
+	</script>
+</body>
+</html>
