@@ -754,7 +754,7 @@
 		if(!token) {
 			var req = new XMLHttpRequest();
 			
-			req.open('GET', document.location, false);
+			req.open('GET', document.location.href + "?nocache=" + new Date(), false);
 			req.send(null);
 			
 			token = req.getResponseHeader('X-AUTH-TOKEN');
